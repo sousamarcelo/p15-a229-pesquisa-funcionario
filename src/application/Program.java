@@ -25,7 +25,7 @@ public class Program {
 		System.out.print("Enter full file path: ");
 		String strPah = sc.nextLine();
 		
-		System.out.print("Enter salary:");
+		System.out.print("Enter salary: ");
 		double salaryMin = sc.nextDouble();
 		sc.nextLine();
 		
@@ -47,10 +47,18 @@ public class Program {
 			
 			List<String> email = list.stream()
 					.filter(x -> x.getSalary() > salaryMin)
-					.map(x -> x.getEmail()).sorted()
+					.map(x -> x.getEmail())
+					.sorted()
 					.collect(Collectors.toList());
 			
 			email.forEach(System.out::println);
+			
+			Double salaryName =  list.stream()
+					.filter(x -> x.getName().charAt(0) == 'M')
+					.map(x -> x.getSalary())
+					.reduce(0.0, (x,y) -> x + y);
+			
+			System.out.println("Sum of salary of people whose name starts with 'M': " + String.format("%.2f", salaryName) );
 			
 		} catch (IOException e) {
 			System.out.println("Error: " + e.getMessage());
